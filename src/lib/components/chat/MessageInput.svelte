@@ -45,8 +45,14 @@
 
 	//订阅store
 	import { ifShowHistory } from './store.js'
+	import { history1 } from './store.js'
+	import { history2 } from './store.js'
+	import { history3 } from './store.js'
+	import { history4 } from './store.js'
+	import { history5 } from './store.js'
 	import { resHistory } from './store.js'
 	import { ifCliHistory } from './store.js'
+	import { keyContent } from './store.js'
 	//结束
 
 	const i18n = getContext('i18n');
@@ -312,6 +318,10 @@
 			dropZone?.removeEventListener('dragleave', onDragLeave);
 		};
 	});
+	//自定义的函数
+	const updateHistory = (prompt) => {
+
+	}
 </script>
 
 <FilesOverlay show={dragged} />
@@ -752,11 +762,13 @@
 										e.target.style.height = '';
 										e.target.style.height = Math.min(e.target.scrollHeight, 200) + 'px';
 										user = null;
+										//这里是输入的事件
+										keyContent.set(prompt)
+										updateHistory(prompt);
 									}}
 									on:focus={(e) => {
 										e.target.style.height = '';
-										e.target.style.height = Math.min(e.target.scrollHeight, 200) + 'px';
-										ifShowHistory.set(true)
+										e.target.style.height = Math.min(e.target.scrollHeight, 200) + 'px';						
 									}}
 									on:paste={(e) => {
 										const clipboardData = e.clipboardData || window.clipboardData;
@@ -781,17 +793,22 @@
 												}
 											}
 										}
-									}}
+									}}									
 									on:focusout={()=>{
-										console.log("focusout");
+										//console.log("focusout");
 										ifShowHistory.set(false);
 										if($ifCliHistory){
 											submitPrompt($resHistory);
 										}
 										ifCliHistory.set(false)
 									}}
+									on:focus={()=>{
+										//console.log("message focus");
+										ifShowHistory.set(true);								
+									}}
 								/>
-								<!-- 上面是写onmouseoer等事件的地方-->
+								<!--上面是写自定义事件的地方-->
+
 								<div class="self-end mb-2 flex space-x-1 mr-1">
 									{#if messages.length == 0 || messages.at(-1).done == true}
 										<Tooltip content={$i18n.t('Record voice')}>

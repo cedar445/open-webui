@@ -65,8 +65,13 @@
 	//订阅store
 	import { ifShowHistory } from './store.js'
 	import { history1 } from './store.js'
+	import { history2 } from './store.js'
+	import { history3 } from './store.js'
+	import { history4 } from './store.js'
+	import { history5 } from './store.js'
 	import { resHistory } from './store.js'
 	import { ifCliHistory } from './store.js'
+	import { keyContent } from './store.js'
 	//结束
 	const i18n: Writable<i18nType> = getContext('i18n');
 
@@ -1481,7 +1486,7 @@
 	};
 </script>
 
-<!-- 我的圆角按键-->
+<!-- cedar 我的圆角按键-->
 <style>
     .rounded-div {
         border: 1px solid #ccc; /* 边框颜色 */
@@ -1634,16 +1639,80 @@
 					tabindex="0"
 					class="flex justify-center text-center rounded-div hover:bg-black/5 dark:hover:bg-white/5 rounded-lg dark:hover:text-white hover:text-black"
 					on:focus={()=>{
-						console.log("focus");
+						//console.log("Chat focus");
 						//ifShowHistory.set(true);		
 					}}
 					on:mousedown={()=>{
-						console.log("down");
+						//console.log("down");
 						ifCliHistory.set(true);
 						resHistory.set($history1)
 					}}
 				>
 				{$history1}
+				</div>
+				<div
+					role="button"
+					tabindex="0"
+					class="flex justify-center text-center rounded-div hover:bg-black/5 dark:hover:bg-white/5 rounded-lg dark:hover:text-white hover:text-black"
+					on:focus={()=>{
+						//console.log("Chat focus");
+						//ifShowHistory.set(true);		
+					}}
+					on:mousedown={()=>{
+						//console.log("down");
+						ifCliHistory.set(true);
+						resHistory.set($history1)
+					}}
+				>
+				{$history2}
+				</div>
+				<div
+					role="button"
+					tabindex="0"
+					class="flex justify-center text-center rounded-div hover:bg-black/5 dark:hover:bg-white/5 rounded-lg dark:hover:text-white hover:text-black"
+					on:focus={()=>{
+						//console.log("Chat focus");
+						//ifShowHistory.set(true);		
+					}}
+					on:mousedown={()=>{
+						//console.log("down");
+						ifCliHistory.set(true);
+						resHistory.set($history1)
+					}}
+				>
+				{$history3}
+				</div>
+				<div
+					role="button"
+					tabindex="0"
+					class="flex justify-center text-center rounded-div hover:bg-black/5 dark:hover:bg-white/5 rounded-lg dark:hover:text-white hover:text-black"
+					on:focus={()=>{
+						//console.log("Chat focus");
+						//ifShowHistory.set(true);		
+					}}
+					on:mousedown={()=>{
+						//console.log("down");
+						ifCliHistory.set(true);
+						resHistory.set($history1)
+					}}
+				>
+				{$history4}
+				</div>
+				<div
+					role="button"
+					tabindex="0"
+					class="flex justify-center text-center rounded-div hover:bg-black/5 dark:hover:bg-white/5 rounded-lg dark:hover:text-white hover:text-black"
+					on:focus={()=>{
+						//console.log("Chat focus");
+						//ifShowHistory.set(true);		
+					}}
+					on:mousedown={()=>{
+						//console.log("down");
+						ifCliHistory.set(true);
+						resHistory.set($history1)
+					}}
+				>
+				{$history5}
 				</div>
 			{/if}
 			<div class={showControls ? 'lg:pr-[24rem]' : ''}>	
