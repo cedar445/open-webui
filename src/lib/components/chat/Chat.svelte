@@ -62,7 +62,12 @@
 	import { error } from '@sveltejs/kit';
 	import ChatControls from './ChatControls.svelte';
 	import EventConfirmDialog from '../common/ConfirmDialog.svelte';
-
+	//订阅store
+	import { ifShowHistory } from './store.js'
+	import { history1 } from './store.js'
+	import { resHistory } from './store.js'
+	import { ifCliHistory } from './store.js'
+	//结束
 	const i18n: Writable<i18nType> = getContext('i18n');
 
 	export let chatIdProp = '';
@@ -1468,6 +1473,24 @@
 	};
 </script>
 
+<!-- 我的圆角按键-->
+<style>
+    .rounded-div {
+        border: 1px solid #ccc; /* 边框颜色 */
+        border-radius: 10px; /* 圆角半径 */
+        padding: 10px; /* 内边距 */
+		margin-bottom: 10px;
+		margin-right: 100px;
+		margin-left: 100px;
+        transition: background-color 0.3s; /* 鼠标移入时的过渡效果 */
+    }
+
+	.rounded-div:hover {
+    	/* background-color: #f0f0f0; /* 鼠标移入时的背景颜色 */
+    }
+	
+</style>
+
 <svelte:head>
 	<title>
 		{title
@@ -1595,8 +1618,26 @@
 					/>
 				</div>
 			</div>
-
-			<div class={showControls ? 'lg:pr-[24rem]' : ''}>
+			<!-- 在对话信息之上的位置显示历史 -->
+			{#if $ifShowHistory}
+				<div
+					role="button"
+					tabindex="0"
+					class="flex justify-center text-center rounded-div hover:bg-black/5 dark:hover:bg-white/5 rounded-lg dark:hover:text-white hover:text-black"
+					on:focus={()=>{
+						console.log("focus");
+						//ifShowHistory.set(true);		
+					}}
+					on:mousedown={()=>{
+						console.log("down");
+						ifCliHistory.set(true);
+						resHistory.set($history1)
+					}}
+				>
+				{$history1}
+				</div>
+			{/if}
+			<div class={showControls ? 'lg:pr-[24rem]' : ''}>	
 				<MessageInput
 					bind:files
 					bind:prompt

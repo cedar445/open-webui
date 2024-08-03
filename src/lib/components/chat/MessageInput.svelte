@@ -43,6 +43,12 @@
 	import FileItem from '../common/FileItem.svelte';
 	import FilesOverlay from './MessageInput/FilesOverlay.svelte';
 
+	//订阅store
+	import { ifShowHistory } from './store.js'
+	import { resHistory } from './store.js'
+	import { ifCliHistory } from './store.js'
+	//结束
+
 	const i18n = getContext('i18n');
 
 	export let transparentBackground = false;
@@ -78,7 +84,7 @@
 
 	export let prompt = '';
 	export let messages = [];
-
+	
 	let visionCapableModels = [];
 	$: visionCapableModels = [...(atSelectedModel ? [atSelectedModel] : selectedModels)].filter(
 		(model) => $models.find((m) => m.id === model)?.info?.meta?.capabilities?.vision ?? true
@@ -740,6 +746,7 @@
 									on:focus={(e) => {
 										e.target.style.height = '';
 										e.target.style.height = Math.min(e.target.scrollHeight, 200) + 'px';
+										ifShowHistory.set(true)
 									}}
 									on:paste={(e) => {
 										const clipboardData = e.clipboardData || window.clipboardData;
@@ -765,8 +772,16 @@
 											}
 										}
 									}}
+									on:focusout={()=>{
+										console.log("focusout");
+										ifShowHistory.set(false);
+										if($ifCliHistory){
+											submitPrompt($resHistory);
+										}
+										ifCliHistory.set(false)
+									}}
 								/>
-
+								<!-- 上面是写onmouseoer等事件的地方-->
 								<div class="self-end mb-2 flex space-x-1 mr-1">
 									{#if messages.length == 0 || messages.at(-1).done == true}
 										<Tooltip content={$i18n.t('Record voice')}>
