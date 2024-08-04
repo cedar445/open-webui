@@ -54,7 +54,16 @@
 	import { ifCliHistory } from './store.js'
 	import { keyContent } from './store.js'
 	//结束
-
+	//自定义函数
+	function handleFocusOut() {
+		//console.log('Focus out event triggered');
+		ifShowHistory.set(false);
+		if($ifCliHistory){
+			submitPrompt($resHistory);
+		}
+		ifCliHistory.set(false)
+	}
+	//结束
 	const i18n = getContext('i18n');
 
 	export let transparentBackground = false;
@@ -310,6 +319,18 @@
 		dropZone?.addEventListener('drop', onDrop);
 		dropZone?.addEventListener('dragleave', onDragLeave);
 
+		if (chatTextAreaElement) {
+			// 手动触发 focusout 事件
+			console.log("element");
+			handleFocusOut();
+			const focusOutEvent = new FocusEvent('focusout', {
+				bubbles: true,
+				cancelable: true,
+				relatedTarget: null
+			});
+			chatTextAreaElement.dispatchEvent(focusOutEvent);
+		}
+		
 		return () => {
 			window.removeEventListener('keydown', handleKeyDown);
 
@@ -795,15 +816,9 @@
 												}
 											}
 										}
-									}}									
-									on:focusout={()=>{
-										//console.log("focusout");
-										ifShowHistory.set(false);
-										if($ifCliHistory){
-											submitPrompt($resHistory);
-										}
-										ifCliHistory.set(false)
-									}}
+									}}		
+																
+									on:focusout={handleFocusOut}
 									on:focus={()=>{
 										//console.log("message focus");
 										ifShowHistory.set(true);								
