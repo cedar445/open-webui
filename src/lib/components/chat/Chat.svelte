@@ -1497,11 +1497,6 @@
 		margin-left: 100px;
         transition: background-color 0.3s; /* 鼠标移入时的过渡效果 */
     }
-
-	.rounded-div:hover {
-    	/* background-color: #f0f0f0; /* 鼠标移入时的背景颜色 */
-    }
-	
 </style>
 
 <svelte:head>

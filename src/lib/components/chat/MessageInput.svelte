@@ -320,7 +320,9 @@
 	});
 	//自定义的函数
 	const updateHistory = (prompt) => {
-
+		if(prompt==""){
+			
+		}
 	}
 </script>
 
