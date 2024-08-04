@@ -73,6 +73,22 @@
 	import { ifCliHistory } from './store.js'
 	import { keyContent } from './store.js'
 	//结束
+	//动画变量
+	let showButton1 = false;
+	let showButton2 = false;
+	let showButton3 = false;
+	let showButton4 = false;
+	let showButton5 = false;
+
+	$: if ($ifShowHistory) {
+		setTimeout(() => showButton1 = true, 100);
+		setTimeout(() => showButton2 = true, 200); 
+		setTimeout(() => showButton3 = true, 300);
+		setTimeout(() => showButton4 = true, 400); 
+		setTimeout(() => showButton5 = true, 500);
+	} else {
+		showButton1 = showButton2 = showButton3 = showButton4 = showButton5 = false;
+	}
 	const i18n: Writable<i18nType> = getContext('i18n');
 
 	export let chatIdProp = '';
@@ -1496,7 +1512,24 @@
 		margin-right: 100px;
 		margin-left: 100px;
         transition: background-color 0.3s; /* 鼠标移入时的过渡效果 */
+		opacity: 0;
+		animation: fade-in-up 0.5s forwards; /* 动画效果 */
     }
+	@keyframes fade-in-up {
+		from {
+			opacity: 0;
+			transform: translateY(20px); /* 向下偏移 */
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0); /* 最终位置 */
+		}
+	}
+
+	.show {
+		opacity: 1;
+		transform: translateY(0); /* 确保最终位置 */
+	}
 </style>
 
 <svelte:head>
@@ -1629,86 +1662,96 @@
 			</div>
 			<!-- 在对话信息之上的位置显示历史 -->
 			{#if $ifShowHistory}
-				<div
-					role="button"
-					tabindex="0"
-					class="flex justify-center text-center rounded-div hover:bg-black/5 dark:hover:bg-white/5 rounded-lg dark:hover:text-white hover:text-black"
-					on:focus={()=>{
-						//console.log("Chat focus");
-						//ifShowHistory.set(true);		
-					}}
-					on:mousedown={()=>{
-						//console.log("down");
-						ifCliHistory.set(true);
-						resHistory.set($history1)
-					}}
-				>
-				{$history1}
-				</div>
-				<div
-					role="button"
-					tabindex="0"
-					class="flex justify-center text-center rounded-div hover:bg-black/5 dark:hover:bg-white/5 rounded-lg dark:hover:text-white hover:text-black"
-					on:focus={()=>{
-						//console.log("Chat focus");
-						//ifShowHistory.set(true);		
-					}}
-					on:mousedown={()=>{
-						//console.log("down");
-						ifCliHistory.set(true);
-						resHistory.set($history1)
-					}}
-				>
-				{$history2}
-				</div>
-				<div
-					role="button"
-					tabindex="0"
-					class="flex justify-center text-center rounded-div hover:bg-black/5 dark:hover:bg-white/5 rounded-lg dark:hover:text-white hover:text-black"
-					on:focus={()=>{
-						//console.log("Chat focus");
-						//ifShowHistory.set(true);		
-					}}
-					on:mousedown={()=>{
-						//console.log("down");
-						ifCliHistory.set(true);
-						resHistory.set($history1)
-					}}
-				>
-				{$history3}
-				</div>
-				<div
-					role="button"
-					tabindex="0"
-					class="flex justify-center text-center rounded-div hover:bg-black/5 dark:hover:bg-white/5 rounded-lg dark:hover:text-white hover:text-black"
-					on:focus={()=>{
-						//console.log("Chat focus");
-						//ifShowHistory.set(true);		
-					}}
-					on:mousedown={()=>{
-						//console.log("down");
-						ifCliHistory.set(true);
-						resHistory.set($history1)
-					}}
-				>
-				{$history4}
-				</div>
-				<div
-					role="button"
-					tabindex="0"
-					class="flex justify-center text-center rounded-div hover:bg-black/5 dark:hover:bg-white/5 rounded-lg dark:hover:text-white hover:text-black"
-					on:focus={()=>{
-						//console.log("Chat focus");
-						//ifShowHistory.set(true);		
-					}}
-					on:mousedown={()=>{
-						//console.log("down");
-						ifCliHistory.set(true);
-						resHistory.set($history1)
-					}}
-				>
-				{$history5}
-				</div>
+				{#if showButton1}
+					<div
+						role="listbox"
+						tabindex="0"
+						class="flex justify-center text-center rounded-div show hover:bg-black/5 dark:hover:bg-white/5 rounded-lg dark:hover:text-white hover:text-black"
+						on:focus={()=>{
+							//console.log("Chat focus");
+							//ifShowHistory.set(true);		
+						}}
+						on:mousedown={()=>{
+							//console.log("down");
+							ifCliHistory.set(true);
+							resHistory.set($history1);
+						}}
+					>
+						{$history1}
+					</div>
+				{/if}
+				{#if showButton2}
+					<div
+						role="button"
+						tabindex="0"
+						class="flex justify-center text-center rounded-div show hover:bg-black/5 dark:hover:bg-white/5 rounded-lg dark:hover:text-white hover:text-black"
+						on:focus={()=>{
+							//console.log("Chat focus");
+							//ifShowHistory.set(true);		
+						}}
+						on:mousedown={()=>{
+							//console.log("down");
+							ifCliHistory.set(true);
+							resHistory.set($history2);
+						}}
+					>
+						{$history2}
+					</div>
+				{/if}
+				{#if showButton3}
+					<div
+						role="button"
+						tabindex="0"
+						class="flex justify-center text-center rounded-div show hover:bg-black/5 dark:hover:bg-white/5 rounded-lg dark:hover:text-white hover:text-black"
+						on:focus={()=>{
+							//console.log("Chat focus");
+							//ifShowHistory.set(true);		
+						}}
+						on:mousedown={()=>{
+							//console.log("down");
+							ifCliHistory.set(true);
+							resHistory.set($history3);
+						}}
+					>
+						{$history3}
+					</div>
+				{/if}
+				{#if showButton4}
+					<div
+						role="button"
+						tabindex="0"
+						class="flex justify-center text-center rounded-div show hover:bg-black/5 dark:hover:bg-white/5 rounded-lg dark:hover:text-white hover:text-black"
+						on:focus={()=>{
+							//console.log("Chat focus");
+							//ifShowHistory.set(true);		
+						}}
+						on:mousedown={()=>{
+							//console.log("down");
+							ifCliHistory.set(true);
+							resHistory.set($history4);
+						}}
+					>
+						{$history4}
+					</div>
+				{/if}
+				{#if showButton5}
+					<div
+						role="button"
+						tabindex="0"
+						class="flex justify-center text-center rounded-div show hover:bg-black/5 dark:hover:bg-white/5 rounded-lg dark:hover:text-white hover:text-black"
+						on:focus={()=>{
+							//console.log("Chat focus");
+							//ifShowHistory.set(true);		
+						}}
+						on:mousedown={()=>{
+							//console.log("down");
+							ifCliHistory.set(true);
+							resHistory.set($history5);
+						}}
+					>
+						{$history5}
+					</div>
+				{/if}
 			{/if}
 			<div class={showControls ? 'lg:pr-[24rem]' : ''}>	
 				<MessageInput
