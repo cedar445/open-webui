@@ -786,7 +786,13 @@
 										e.target.style.height = Math.min(e.target.scrollHeight, 200) + 'px';
 										user = null;
 										//这里是输入的事件
-										keyContent.set(prompt)
+										if(prompt!=""){
+											keyContent.set(prompt);
+											history1.set($keyContent);
+										}
+										else{
+											history1.set("string1")
+										}
 										updateHistory(prompt);
 									}}
 									on:focus={(e) => {
