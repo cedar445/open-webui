@@ -53,7 +53,6 @@
 	import { resHistory } from './store.js'
 	import { ifCliHistory } from './store.js'
 	import { keyContent } from './store.js'
-	//结束
 	//自定义函数
 	function handleFocusOut() {
 		//console.log('Focus out event triggered');
@@ -63,7 +62,10 @@
 		}
 		ifCliHistory.set(false)
 	}
-	//结束
+	//历史的获取
+	const apiUrl = 'http://localhost:8080/api/v1/chats/all'
+	let jsonData;
+	let history = [];
 	const i18n = getContext('i18n');
 
 	export let transparentBackground = false;
@@ -330,7 +332,31 @@
 			});
 			chatTextAreaElement.dispatchEvent(focusOutEvent);
 		}
-		
+		//自定义onmount函数
+		fetch(apiUrl)
+			.then(response => {
+				if (!response.ok) {
+				throw new Error('response寄了' + response.statusText);
+				}
+				return response.json();
+			})
+			.then(data => {
+				// 将JSON数据保存到变量中
+				jsonData = data;
+				console.log('保存的json数据', jsonData);
+				// 解析 JSON 数据
+				try {
+					console.log("json Parse结果"+jsonData);
+					
+				} catch (error) {
+					console.error('json Parse寄了', error);
+				}
+			})
+			.catch(error => {
+				console.error('fetch寄了', error);
+			}
+		);
+
 		return () => {
 			window.removeEventListener('keydown', handleKeyDown);
 
