@@ -64,8 +64,103 @@
 		ifShowHistory.set(false);
 		if($ifCliHistory){
 			submitPrompt($resHistory);
+			getHistory();
 		}
 		ifCliHistory.set(false)
+	}
+	function updateHistory(myHistory){
+		showButton1.set(false);
+		showButton2.set(false);
+		showButton3.set(false);
+		showButton4.set(false);
+		showButton5.set(false);
+		let i=1;
+		for(const his in myHistory){
+			if(i==1){
+				history1.set(myHistory[his]);
+				showButton1.set(true);
+			}else if(i==2){
+				history2.set(myHistory[his]);
+				showButton2.set(true);
+			}else if(i==3){
+				history3.set(myHistory[his]);
+				showButton3.set(true);
+			}else if(i==4){
+				history4.set(myHistory[his]);
+				showButton4.set(true);
+			}else if(i==5){
+				history5.set(myHistory[his]);
+				showButton5.set(true);
+			}
+			i++;							
+		}
+	}
+	function getHistory(){
+		fetch(apiUrl)
+			.then(response => {
+				if (!response.ok) {
+				throw new Error('response寄了' + response.statusText);
+				}
+				return response.json();
+			})
+			.then(data => {
+				// 将JSON数据保存到变量中
+				jsonData = data;
+				console.log('保存的json数据', jsonData);
+				// 解析 JSON 数据
+				try {
+					console.log("json Parse结果"+jsonData);
+					jsonData.forEach(element => {
+						for(const key in element.chat.history.messages){
+							if(element.chat.history.messages[key].role=='user'){
+								userhistory.push(element.chat.history.messages[key].content)
+							}
+						}
+					});
+					console.log(userhistory);
+					updateHistory(userhistory);
+					/*
+					showButton1.set(false);
+					showButton2.set(false);
+					showButton3.set(false);
+					showButton4.set(false);
+					showButton5.set(false);
+					let i=1;
+					for(const his in userhistory){
+						if(i==1){
+							history1.set(userhistory[his]);
+							showButton1.set(true);
+						}else if(i==2){
+							history2.set(userhistory[his]);
+							showButton2.set(true);
+						}else if(i==3){
+							history3.set(userhistory[his]);
+							showButton3.set(true);
+						}else if(i==4){
+							history4.set(userhistory[his]);
+							showButton4.set(true);
+						}else if(i==5){
+							history5.set(userhistory[his]);
+							showButton5.set(true);
+						}
+						i++;							
+					}
+					console.log(i+"个");
+					*/	
+				} catch (error) {
+					console.error('json Parse寄了', error);
+				}
+			})
+			.catch(error => {
+				console.error('fetch寄了', error);
+			}
+		);
+	}
+	function regexHistory(myPrompt){
+		const pattern = myPrompt;
+		const regex = new RegExp(pattern);
+		const res = userhistory.filter(item => regex.test(item));
+		updateHistory(res);
 	}
 	//历史变量
 	const apiUrl = 'http://localhost:8080/api/v1/chats/all'
@@ -362,7 +457,7 @@
 						}
 					});
 					console.log(userhistory);
-					updateHistory();
+					updateHistory(userhistory);
 					/*
 					showButton1.set(false);
 					showButton2.set(false);
@@ -408,34 +503,6 @@
 			dropZone?.removeEventListener('dragleave', onDragLeave);
 		};
 	});
-	//自定义的函数
-	const updateHistory = () => {
-		showButton1.set(false);
-		showButton2.set(false);
-		showButton3.set(false);
-		showButton4.set(false);
-		showButton5.set(false);
-		let i=1;
-		for(const his in userhistory){
-			if(i==1){
-				history1.set(userhistory[his]);
-				showButton1.set(true);
-			}else if(i==2){
-				history2.set(userhistory[his]);
-				showButton2.set(true);
-			}else if(i==3){
-				history3.set(userhistory[his]);
-				showButton3.set(true);
-			}else if(i==4){
-				history4.set(userhistory[his]);
-				showButton4.set(true);
-			}else if(i==5){
-				history5.set(userhistory[his]);
-				showButton5.set(true);
-			}
-			i++;							
-		}
-	}
 </script>
 
 <FilesOverlay show={dragged} />
@@ -608,6 +675,8 @@
 
 							if ($settings?.speechAutoSend ?? false) {
 								submitPrompt(prompt);
+								ifShowHistory.set(false);
+								getHistory();
 							}
 						}}
 					/>
@@ -617,6 +686,8 @@
 						on:submit|preventDefault={() => {
 							// check if selectedModels support image input
 							submitPrompt(prompt);
+							ifShowHistory.set(false);
+							getHistory();
 						}}
 					>
 						<div
@@ -763,6 +834,8 @@
 											// Submit the prompt when Enter key is pressed
 											if (prompt !== '' && e.key === 'Enter' && !e.shiftKey) {
 												submitPrompt(prompt);
+												ifShowHistory.set(false);
+												getHistory();
 											}
 										}
 									}}
@@ -879,10 +952,10 @@
 										//这里是输入的事件
 										if(prompt!=""){
 											keyContent.set(prompt);
-											history1.set($keyContent);
+											regexHistory($keyContent)
 										}
 										else{
-											updateHistory();
+											updateHistory(userhistory);
 										}
 									}}
 									on:focus={(e) => {
@@ -917,7 +990,8 @@
 									on:focusout={handleFocusOut}
 									on:focus={()=>{
 										//console.log("message focus");
-										ifShowHistory.set(true);								
+										ifShowHistory.set(true);
+										regexHistory(prompt);						
 									}}
 								/>
 								<!--上面是写自定义事件的地方-->
