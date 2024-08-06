@@ -72,22 +72,26 @@
 	import { resHistory } from './store.js'
 	import { ifCliHistory } from './store.js'
 	import { keyContent } from './store.js'
+	import { showButton1 } from './store.js'
+	import { showButton2 } from './store.js'
+	import { showButton3 } from './store.js'
+	import { showButton4 } from './store.js'
+	import { showButton5 } from './store.js'
 	//结束
 	//动画变量
-	let showButton1 = false;
-	let showButton2 = false;
-	let showButton3 = false;
-	let showButton4 = false;
-	let showButton5 = false;
 
 	$: if ($ifShowHistory) {
-		setTimeout(() => showButton1 = true, 100);
-		setTimeout(() => showButton2 = true, 200); 
-		setTimeout(() => showButton3 = true, 300);
-		setTimeout(() => showButton4 = true, 400); 
-		setTimeout(() => showButton5 = true, 500);
+		setTimeout(() => showButton1.set(true), 100);
+		setTimeout(() => showButton2.set(true), 200); 
+		setTimeout(() => showButton3.set(true), 300);
+		setTimeout(() => showButton4.set(true), 400); 
+		setTimeout(() => showButton5.set(true), 500);
 	} else {
-		showButton1 = showButton2 = showButton3 = showButton4 = showButton5 = false;
+		showButton1.set(false);
+		showButton2.set(false);
+		showButton3.set(false);
+		showButton4.set(false);
+		showButton5.set(false);
 	}
 	const i18n: Writable<i18nType> = getContext('i18n');
 
@@ -1662,7 +1666,7 @@
 			</div>
 			<!-- 在对话信息之上的位置显示历史 -->
 			{#if $ifShowHistory}
-				{#if showButton1}
+				{#if $showButton1}
 					<div
 						role="listbox"
 						tabindex="0"
@@ -1680,7 +1684,7 @@
 						{$history1}
 					</div>
 				{/if}
-				{#if showButton2}
+				{#if $showButton2}
 					<div
 						role="button"
 						tabindex="0"
@@ -1698,7 +1702,7 @@
 						{$history2}
 					</div>
 				{/if}
-				{#if showButton3}
+				{#if $showButton3}
 					<div
 						role="button"
 						tabindex="0"
@@ -1716,7 +1720,7 @@
 						{$history3}
 					</div>
 				{/if}
-				{#if showButton4}
+				{#if $showButton4}
 					<div
 						role="button"
 						tabindex="0"
@@ -1734,7 +1738,7 @@
 						{$history4}
 					</div>
 				{/if}
-				{#if showButton5}
+				{#if $showButton5}
 					<div
 						role="button"
 						tabindex="0"
