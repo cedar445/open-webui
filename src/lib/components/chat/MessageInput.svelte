@@ -106,10 +106,10 @@
 			.then(data => {
 				// 将JSON数据保存到变量中
 				jsonData = data;
-				console.log('保存的json数据', jsonData);
+				//console.log('保存的json数据', jsonData);
 				// 解析 JSON 数据
 				try {
-					console.log("json Parse结果"+jsonData);
+					//console.log("json Parse结果"+jsonData);
 					jsonData.forEach(element => {
 						for(const key in element.chat.history.messages){
 							if(element.chat.history.messages[key].role=='user'){
@@ -445,10 +445,10 @@
 			.then(data => {
 				// 将JSON数据保存到变量中
 				jsonData = data;
-				console.log('保存的json数据', jsonData);
+				//console.log('保存的json数据', jsonData);
 				// 解析 JSON 数据
 				try {
-					console.log("json Parse结果"+jsonData);
+					//console.log("json Parse结果"+jsonData);
 					jsonData.forEach(element => {
 						for(const key in element.chat.history.messages){
 							if(element.chat.history.messages[key].role=='user'){
@@ -991,7 +991,8 @@
 									on:focus={()=>{
 										//console.log("message focus");
 										ifShowHistory.set(true);
-										regexHistory(prompt);						
+										regexHistory(prompt);	
+										console.log("regex:"+$showButton1+$showButton2+$showButton3+$showButton4+$showButton5);															
 									}}
 								/>
 								<!--上面是写自定义事件的地方-->
