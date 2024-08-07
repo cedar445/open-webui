@@ -62,6 +62,11 @@
 	function handleFocusOut() {
 		//console.log('Focus out event triggered');
 		ifShowHistory.set(false);
+		showButton1.set(false);
+		showButton2.set(false);
+		showButton3.set(false);
+		showButton4.set(false);
+		showButton5.set(false);
 		if($ifCliHistory){
 			submitPrompt($resHistory);
 			getHistory();
@@ -990,7 +995,6 @@
 									on:focusout={handleFocusOut}
 									on:focus={()=>{
 										//console.log("message focus");
-										ifShowHistory.set(true);
 										regexHistory(prompt);	
 										console.log("regex:"+$showButton1+$showButton2+$showButton3+$showButton4+$showButton5);															
 									}}

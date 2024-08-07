@@ -79,7 +79,7 @@
 	import { showButton5 } from './store.js'
 	//结束
 	//动画变量
-
+	/*
 	$: if ($ifShowHistory) {
 		setTimeout(() => showButton1.set(true), 100);
 		setTimeout(() => showButton2.set(true), 200); 
@@ -93,6 +93,7 @@
 		showButton4.set(false);
 		showButton5.set(false);
 	}
+	*/
 	const i18n: Writable<i18nType> = getContext('i18n');
 
 	export let chatIdProp = '';
@@ -1665,7 +1666,7 @@
 				</div>
 			</div>
 			<!-- 在对话信息之上的位置显示历史 -->
-			{#if $ifShowHistory}
+			
 				{#if $showButton1}
 					<div
 						role="listbox"
@@ -1756,7 +1757,7 @@
 						{$history5}
 					</div>
 				{/if}
-			{/if}
+			
 			<div class={showControls ? 'lg:pr-[24rem]' : ''}>	
 				<MessageInput
 					bind:files
