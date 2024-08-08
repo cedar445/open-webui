@@ -124,36 +124,8 @@
 							}
 						}
 					});
+					userhistory=removeDuplicatesAndSort(userhistory);
 					console.log(userhistory);
-					//updateHistory(userhistory);
-					/*
-					showButton1.set(false);
-					showButton2.set(false);
-					showButton3.set(false);
-					showButton4.set(false);
-					showButton5.set(false);
-					let i=1;
-					for(const his in userhistory){
-						if(i==1){
-							history1.set(userhistory[his]);
-							showButton1.set(true);
-						}else if(i==2){
-							history2.set(userhistory[his]);
-							showButton2.set(true);
-						}else if(i==3){
-							history3.set(userhistory[his]);
-							showButton3.set(true);
-						}else if(i==4){
-							history4.set(userhistory[his]);
-							showButton4.set(true);
-						}else if(i==5){
-							history5.set(userhistory[his]);
-							showButton5.set(true);
-						}
-						i++;							
-					}
-					console.log(i+"个");
-					*/	
 				} catch (error) {
 					console.error('json Parse寄了', error);
 				}
@@ -166,12 +138,26 @@
 		
 	}
 	function regexHistory(myPrompt){
+		getHistory();
 		const pattern = myPrompt;
 		const regex = new RegExp(pattern);
 		const res = userhistory.filter(item => regex.test(item));
 		updateHistory(res);
 		console.log("regex");
 		
+	}
+	function removeDuplicatesAndSort(arr) {
+		// 创建一个对象来存储元素出现的次数
+		const countMap = {};
+		// 统计每个元素出现的次数
+		arr.forEach(item => {
+			countMap[item] = (countMap[item] || 0) + 1;
+		});
+
+		// 根据元素的出现次数对数组进行排序，并去重
+		return Object.keys(countMap)
+			.sort((a, b) => countMap[b] - countMap[a])
+			//.map(Number); // 如果数组元素是数字，则使用map(Number)将字符串转换为数字
 	}
 	//历史变量
 	const apiUrl = 'http://localhost:8080/api/v1/chats/all'
@@ -434,17 +420,6 @@
 		dropZone?.addEventListener('dragleave', onDragLeave);
 
 		//自定义onmount函数
-		if (chatTextAreaElement) {
-			// 手动触发 focusout 事件
-			console.log("element");
-			handleFocusOut();
-			const focusOutEvent = new FocusEvent('focusout', {
-				bubbles: true,
-				cancelable: true,
-				relatedTarget: null
-			});
-			chatTextAreaElement.dispatchEvent(focusOutEvent);
-		}
 		//历史的获取
 		fetch(apiUrl)
 			.then(response => {
@@ -468,35 +443,8 @@
 						}
 					});
 					console.log(userhistory);
+					userhistory=removeDuplicatesAndSort(userhistory);
 					updateHistory(userhistory);
-					/*
-					showButton1.set(false);
-					showButton2.set(false);
-					showButton3.set(false);
-					showButton4.set(false);
-					showButton5.set(false);
-					let i=1;
-					for(const his in userhistory){
-						if(i==1){
-							history1.set(userhistory[his]);
-							showButton1.set(true);
-						}else if(i==2){
-							history2.set(userhistory[his]);
-							showButton2.set(true);
-						}else if(i==3){
-							history3.set(userhistory[his]);
-							showButton3.set(true);
-						}else if(i==4){
-							history4.set(userhistory[his]);
-							showButton4.set(true);
-						}else if(i==5){
-							history5.set(userhistory[his]);
-							showButton5.set(true);
-						}
-						i++;							
-					}
-					console.log(i+"个");
-					*/	
 				} catch (error) {
 					console.error('json Parse寄了', error);
 				}
@@ -969,7 +917,7 @@
 											regexHistory($keyContent)
 										}
 										else{
-											//updateHistory(userhistory);
+											updateHistory(userhistory);
 										}
 									}}
 									on:focus={(e) => {
