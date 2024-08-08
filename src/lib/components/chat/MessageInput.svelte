@@ -59,26 +59,27 @@
 	import { ifCliHistory } from './store.js'
 	import { keyContent } from './store.js'
 	//自定义函数
-	function handleFocusOut() {
-		//console.log('Focus out event triggered');
-		ifShowHistory.set(false);
+	function setFalse(){
 		showButton1.set(false);
 		showButton2.set(false);
 		showButton3.set(false);
 		showButton4.set(false);
 		showButton5.set(false);
+		console.log("setFalse");	
+	}
+	function handleFocusOut() {
+		//console.log('Focus out event triggered');		
 		if($ifCliHistory){
 			submitPrompt($resHistory);
 			getHistory();
+			updateHistory(userhistory)
 		}
-		ifCliHistory.set(false)
+		setFalse();
+		ifCliHistory.set(false);
+		console.log("focusout");
 	}
 	function updateHistory(myHistory){
-		showButton1.set(false);
-		showButton2.set(false);
-		showButton3.set(false);
-		showButton4.set(false);
-		showButton5.set(false);
+		setFalse();
 		let i=1;
 		for(const his in myHistory){
 			if(i==1){
@@ -99,6 +100,7 @@
 			}
 			i++;							
 		}
+		console.log("update");
 	}
 	function getHistory(){
 		fetch(apiUrl)
@@ -123,7 +125,7 @@
 						}
 					});
 					console.log(userhistory);
-					updateHistory(userhistory);
+					//updateHistory(userhistory);
 					/*
 					showButton1.set(false);
 					showButton2.set(false);
@@ -160,12 +162,16 @@
 				console.error('fetch寄了', error);
 			}
 		);
+		console.log("getHistory");
+		
 	}
 	function regexHistory(myPrompt){
 		const pattern = myPrompt;
 		const regex = new RegExp(pattern);
 		const res = userhistory.filter(item => regex.test(item));
 		updateHistory(res);
+		console.log("regex");
+		
 	}
 	//历史变量
 	const apiUrl = 'http://localhost:8080/api/v1/chats/all'
@@ -679,9 +685,9 @@
 							document.getElementById('chat-textarea')?.focus();
 
 							if ($settings?.speechAutoSend ?? false) {
-								submitPrompt(prompt);
-								ifShowHistory.set(false);
+								submitPrompt(prompt);						
 								getHistory();
+								setFalse();
 							}
 						}}
 					/>
@@ -691,8 +697,8 @@
 						on:submit|preventDefault={() => {
 							// check if selectedModels support image input
 							submitPrompt(prompt);
-							ifShowHistory.set(false);
 							getHistory();
+							setFalse();
 						}}
 					>
 						<div
@@ -838,9 +844,12 @@
 
 											// Submit the prompt when Enter key is pressed
 											if (prompt !== '' && e.key === 'Enter' && !e.shiftKey) {
-												submitPrompt(prompt);
-												ifShowHistory.set(false);
+												submitPrompt(prompt);							
 												getHistory();
+												setFalse();
+											}
+											else if(prompt == ''){
+												updateHistory(userhistory);
 											}
 										}
 									}}
@@ -960,7 +969,7 @@
 											regexHistory($keyContent)
 										}
 										else{
-											updateHistory(userhistory);
+											//updateHistory(userhistory);
 										}
 									}}
 									on:focus={(e) => {
@@ -996,7 +1005,7 @@
 									on:focus={()=>{
 										//console.log("message focus");
 										regexHistory(prompt);	
-										console.log("regex:"+$showButton1+$showButton2+$showButton3+$showButton4+$showButton5);															
+										//console.log("regex:"+$showButton1+$showButton2+$showButton3+$showButton4+$showButton5);															
 									}}
 								/>
 								<!--上面是写自定义事件的地方-->

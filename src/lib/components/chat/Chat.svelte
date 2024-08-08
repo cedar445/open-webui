@@ -594,7 +594,11 @@
 			await tick();
 			_responses = await sendPrompt(userPrompt, userMessageId, { newChat: true });
 		}
-
+		showButton1.set(false);
+		showButton2.set(false);
+		showButton3.set(false);
+		showButton4.set(false);
+		showButton5.set(false);
 		return _responses;
 	};
 
