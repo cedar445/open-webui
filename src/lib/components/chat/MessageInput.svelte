@@ -58,6 +58,7 @@
 	import { resHistory } from './store.js'
 	import { ifCliHistory } from './store.js'
 	import { keyContent } from './store.js'
+	import { userId } from './store.js';
 	//自定义函数
 	function setFalse(){
 		showButton1.set(false);
@@ -65,7 +66,7 @@
 		showButton3.set(false);
 		showButton4.set(false);
 		showButton5.set(false);
-		console.log("setFalse");	
+		//console.log("setFalse");	
 	}
 	function handleFocusOut() {
 		//console.log('Focus out event triggered');		
@@ -100,13 +101,39 @@
 			}
 			i++;							
 		}
-		console.log("update");
+		//console.log("update");
 	}
-	function getHistory(){
-		fetch(apiUrl)
+	function getUser(){
+		let resId;
+		fetch(userApiUrl)
 			.then(response => {
 				if (!response.ok) {
-				throw new Error('response寄了' + response.statusText);
+					throw new Error('user response寄了' + response.statusText);
+				}
+				return response.json();
+			})
+			.then(data => {
+				try {
+					resId=data.id;
+					userId.set(resId);
+				} catch (error) {
+					console.error('user id赋值寄了', error);
+				}
+			})
+			.catch(error => {
+				console.error('user fetch寄了', error);
+			}
+		);
+		console.log("userid:"+$userId);
+	}
+	$: if( $userId == '0' ){
+		getUser();
+	}
+	function getHistory(){
+		fetch(historyApiUrl)
+			.then(response => {
+				if (!response.ok) {
+					throw new Error('response寄了' + response.statusText);
 				}
 				return response.json();
 			})
@@ -119,13 +146,13 @@
 					//console.log("json Parse结果"+jsonData);
 					jsonData.forEach(element => {
 						for(const key in element.chat.history.messages){
-							if(element.chat.history.messages[key].role=='user'){
+							if(element.chat.history.messages[key].role=='user' && element.user_id==$userId){
 								userhistory.push(element.chat.history.messages[key].content)
 							}
 						}
 					});
 					userhistory=removeDuplicatesAndSort(userhistory);
-					console.log(userhistory);
+					//console.log(userhistory);
 				} catch (error) {
 					console.error('json Parse寄了', error);
 				}
@@ -134,8 +161,7 @@
 				console.error('fetch寄了', error);
 			}
 		);
-		console.log("getHistory");
-		
+		//console.log("getHistory");
 	}
 	function regexHistory(myPrompt){
 		getHistory();
@@ -143,7 +169,7 @@
 		const regex = new RegExp(pattern);
 		const res = userhistory.filter(item => regex.test(item));
 		updateHistory(res);
-		console.log("regex");
+		//console.log("regex");
 		
 	}
 	function removeDuplicatesAndSort(arr) {
@@ -160,7 +186,8 @@
 			//.map(Number); // 如果数组元素是数字，则使用map(Number)将字符串转换为数字
 	}
 	//历史变量
-	const apiUrl = 'http://localhost:8080/api/v1/chats/all'
+	const historyApiUrl = 'http://localhost:8080/api/v1/chats/all'
+	const userApiUrl = 'http://localhost:8080/api/v1/auths'
 	let jsonData;
 	let userhistory: any[] = [];
 
@@ -355,6 +382,7 @@
 	};
 
 	onMount(() => {
+		
 		window.setTimeout(() => chatTextAreaElement?.focus(), 0);
 
 		const dropZone = document.querySelector('body');
@@ -421,7 +449,7 @@
 
 		//自定义onmount函数
 		//历史的获取
-		fetch(apiUrl)
+		fetch(historyApiUrl)
 			.then(response => {
 				if (!response.ok) {
 				throw new Error('response寄了' + response.statusText);
@@ -437,12 +465,12 @@
 					//console.log("json Parse结果"+jsonData);
 					jsonData.forEach(element => {
 						for(const key in element.chat.history.messages){
-							if(element.chat.history.messages[key].role=='user'){
+							if(element.chat.history.messages[key].role=='user' && element.user_id==$userId){
 								userhistory.push(element.chat.history.messages[key].content)
 							}
 						}
 					});
-					console.log(userhistory);
+					//console.log(userhistory);
 					userhistory=removeDuplicatesAndSort(userhistory);
 					updateHistory(userhistory);
 				} catch (error) {
@@ -951,9 +979,13 @@
 																
 									on:focusout={handleFocusOut}
 									on:focus={()=>{
-										//console.log("message focus");
+										console.log("我focus");
 										regexHistory(prompt);	
 										//console.log("regex:"+$showButton1+$showButton2+$showButton3+$showButton4+$showButton5);															
+									}}
+									on:mousedown={()=>{
+										getUser();
+										regexHistory(prompt);
 									}}
 								/>
 								<!--上面是写自定义事件的地方-->

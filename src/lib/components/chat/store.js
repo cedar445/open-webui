@@ -13,3 +13,4 @@ export const showButton5 = writable(false);
 export const resHistory = writable("0");
 export const ifCliHistory = writable(false)
 export const keyContent = writable("")
+export const userId = writable("0")
