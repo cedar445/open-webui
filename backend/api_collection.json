@@ -1,0 +1,232 @@
+{
+    "info": {
+        "name": "open-webui",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "get_models",
+            "request": {
+                "url": "http://localhost:8080/api/models",
+                "method": "GET"
+            }
+        },
+        {
+            "name": "generate_chat_completions",
+            "request": {
+                "url": "http://localhost:8080/api/chat/completions",
+                "method": "POST"
+            }
+        },
+        {
+            "name": "chat_completed",
+            "request": {
+                "url": "http://localhost:8080/api/chat/completed",
+                "method": "POST"
+            }
+        },
+        {
+            "name": "chat_action",
+            "request": {
+                "url": "http://localhost:8080/api/chat/actions/{action_id}",
+                "method": "POST"
+            }
+        },
+        {
+            "name": "get_task_config",
+            "request": {
+                "url": "http://localhost:8080/api/task/config",
+                "method": "GET"
+            }
+        },
+        {
+            "name": "update_task_config",
+            "request": {
+                "url": "http://localhost:8080/api/task/config/update",
+                "method": "POST"
+            }
+        },
+        {
+            "name": "generate_title",
+            "request": {
+                "url": "http://localhost:8080/api/task/title/completions",
+                "method": "POST"
+            }
+        },
+        {
+            "name": "generate_search_query",
+            "request": {
+                "url": "http://localhost:8080/api/task/query/completions",
+                "method": "POST"
+            }
+        },
+        {
+            "name": "generate_emoji",
+            "request": {
+                "url": "http://localhost:8080/api/task/emoji/completions",
+                "method": "POST"
+            }
+        },
+        {
+            "name": "get_tools_function_calling",
+            "request": {
+                "url": "http://localhost:8080/api/task/tools/completions",
+                "method": "POST"
+            }
+        },
+        {
+            "name": "get_pipelines_list",
+            "request": {
+                "url": "http://localhost:8080/api/pipelines/list",
+                "method": "GET"
+            }
+        },
+        {
+            "name": "upload_pipeline",
+            "request": {
+                "url": "http://localhost:8080/api/pipelines/upload",
+                "method": "POST"
+            }
+        },
+        {
+            "name": "add_pipeline",
+            "request": {
+                "url": "http://localhost:8080/api/pipelines/add",
+                "method": "POST"
+            }
+        },
+        {
+            "name": "delete_pipeline",
+            "request": {
+                "url": "http://localhost:8080/api/pipelines/delete",
+                "method": "DELETE"
+            }
+        },
+        {
+            "name": "get_pipelines",
+            "request": {
+                "url": "http://localhost:8080/api/pipelines",
+                "method": "GET"
+            }
+        },
+        {
+            "name": "get_pipeline_valves",
+            "request": {
+                "url": "http://localhost:8080/api/pipelines/{pipeline_id}/valves",
+                "method": "GET"
+            }
+        },
+        {
+            "name": "get_pipeline_valves_spec",
+            "request": {
+                "url": "http://localhost:8080/api/pipelines/{pipeline_id}/valves/spec",
+                "method": "GET"
+            }
+        },
+        {
+            "name": "update_pipeline_valves",
+            "request": {
+                "url": "http://localhost:8080/api/pipelines/{pipeline_id}/valves/update",
+                "method": "POST"
+            }
+        },
+        {
+            "name": "get_app_config",
+            "request": {
+                "url": "http://localhost:8080/api/config",
+                "method": "GET"
+            }
+        },
+        {
+            "name": "get_model_filter_config",
+            "request": {
+                "url": "http://localhost:8080/api/config/model/filter",
+                "method": "GET"
+            }
+        },
+        {
+            "name": "update_model_filter_config",
+            "request": {
+                "url": "http://localhost:8080/api/config/model/filter",
+                "method": "POST"
+            }
+        },
+        {
+            "name": "get_webhook_url",
+            "request": {
+                "url": "http://localhost:8080/api/webhook",
+                "method": "GET"
+            }
+        },
+        {
+            "name": "update_webhook_url",
+            "request": {
+                "url": "http://localhost:8080/api/webhook",
+                "method": "POST"
+            }
+        },
+        {
+            "name": "get_app_config",
+            "request": {
+                "url": "http://localhost:8080/api/version",
+                "method": "GET"
+            }
+        },
+        {
+            "name": "get_app_changelog",
+            "request": {
+                "url": "http://localhost:8080/api/changelog",
+                "method": "GET"
+            }
+        },
+        {
+            "name": "get_app_latest_release_version",
+            "request": {
+                "url": "http://localhost:8080/api/version/updates",
+                "method": "GET"
+            }
+        },
+        {
+            "name": "oauth_login",
+            "request": {
+                "url": "http://localhost:8080/oauth/{provider}/login",
+                "method": "GET"
+            }
+        },
+        {
+            "name": "oauth_callback",
+            "request": {
+                "url": "http://localhost:8080/oauth/{provider}/callback",
+                "method": "GET"
+            }
+        },
+        {
+            "name": "get_manifest_json",
+            "request": {
+                "url": "http://localhost:8080/manifest.json",
+                "method": "GET"
+            }
+        },
+        {
+            "name": "get_opensearch_xml",
+            "request": {
+                "url": "http://localhost:8080/opensearch.xml",
+                "method": "GET"
+            }
+        },
+        {
+            "name": "healthcheck",
+            "request": {
+                "url": "http://localhost:8080/health",
+                "method": "GET"
+            }
+        },
+        {
+            "name": "healthcheck_with_db",
+            "request": {
+                "url": "http://localhost:8080/health/db",
+                "method": "GET"
+            }
+        }
+    ]
+}

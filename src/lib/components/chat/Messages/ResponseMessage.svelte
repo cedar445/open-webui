@@ -416,6 +416,14 @@
 						{dayjs(message.timestamp * 1000).format($i18n.t('h:mm a'))}
 					</span>
 				{/if}
+
+				<!--where to inject round count-->
+				<!--or before timestamp-->
+				<span
+					class=" self-center text-black text-xs font-medium uppercase"
+				>
+					#1
+				</span>
 			</Name>
 
 			{#if (message?.files ?? []).filter((f) => f.type === 'image').length > 0}

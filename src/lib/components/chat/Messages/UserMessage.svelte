@@ -86,6 +86,13 @@
 							{dayjs(message.timestamp * 1000).format($i18n.t('h:mm a'))}
 						</span>
 					{/if}
+
+					<!--where to inject round count if settings.chatBubble is false-->
+					<span
+						class=" self-center text-black text-xs font-medium uppercase"
+					>
+						#1
+					</span>
 				</Name>
 			</div>
 		{/if}
@@ -162,6 +169,13 @@
 				</div>
 			{:else}
 				<div class="w-full">
+					<!--where to inject round count-->
+					<span
+						class=" self-center text-black text-xs font-medium uppercase"
+					>
+						#1
+					</span>
+
 					<div class="flex {$settings?.chatBubble ?? true ? 'justify-end' : ''} mb-2">
 						<div
 							class="rounded-3xl {$settings?.chatBubble ?? true
