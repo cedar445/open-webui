@@ -25,6 +25,7 @@
 	export let showPreviousMessage: Function;
 	export let showNextMessage: Function;
 	export let copyToClipboard: Function;
+	export let count;
 
 	let edit = false;
 	let editedContent = '';
@@ -79,6 +80,13 @@
 						{$i18n.t('You')}
 					{/if}
 
+					<!--where to inject round count if settings.chatBubble is false-->
+					<span
+						class=" self-center text-black text-xs font-medium uppercase"
+					>
+						#{count}
+					</span>
+
 					{#if message.timestamp}
 						<span
 							class=" invisible group-hover:visible text-gray-400 text-xs font-medium uppercase"
@@ -86,13 +94,6 @@
 							{dayjs(message.timestamp * 1000).format($i18n.t('h:mm a'))}
 						</span>
 					{/if}
-
-					<!--where to inject round count if settings.chatBubble is false-->
-					<span
-						class=" self-center text-black text-xs font-medium uppercase"
-					>
-						#1
-					</span>
 				</Name>
 			</div>
 		{/if}
@@ -169,14 +170,14 @@
 				</div>
 			{:else}
 				<div class="w-full">
-					<!--where to inject round count-->
-					<span
-						class=" self-center text-black text-xs font-medium uppercase"
-					>
-						#1
-					</span>
-
 					<div class="flex {$settings?.chatBubble ?? true ? 'justify-end' : ''} mb-2">
+						<!--where to inject round count-->
+						<span
+							class=" self-center justify-end text-black text-xs font-medium uppercase"
+						>
+							#{count}
+						</span>
+
 						<div
 							class="rounded-3xl {$settings?.chatBubble ?? true
 								? `max-w-[90%] px-5 py-2  bg-gray-50 dark:bg-gray-850 ${

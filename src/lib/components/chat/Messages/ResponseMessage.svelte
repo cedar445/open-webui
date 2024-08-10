@@ -56,6 +56,7 @@
 	export let continueGeneration: Function;
 	export let regenerateResponse: Function;
 	export let chatActionHandler: Function;
+	export let count;
 
 	let model = null;
 	$: model = $models.find((m) => m.id === message.model);
@@ -408,6 +409,14 @@
 		<div class="w-full overflow-hidden pl-1">
 			<Name>
 				{model?.name ?? message.model}
+				
+				<!--where to inject round count-->
+				<!--or before timestamp-->
+				<span
+					class=" self-center text-black text-xs font-medium uppercase"
+				>
+					#{count}
+				</span>
 
 				{#if message.timestamp}
 					<span
@@ -416,14 +425,6 @@
 						{dayjs(message.timestamp * 1000).format($i18n.t('h:mm a'))}
 					</span>
 				{/if}
-
-				<!--where to inject round count-->
-				<!--or before timestamp-->
-				<span
-					class=" self-center text-black text-xs font-medium uppercase"
-				>
-					#1
-				</span>
 			</Name>
 
 			{#if (message?.files ?? []).filter((f) => f.type === 'image').length > 0}

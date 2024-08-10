@@ -2,6 +2,7 @@
 	import { v4 as uuidv4 } from 'uuid';
 	import { chats, config, settings, user as _user, mobile } from '$lib/stores';
 	import { tick, getContext, onMount } from 'svelte';
+	import { writable } from 'svelte/store';
 
 	import { toast } from 'svelte-sonner';
 	import { getChatList, updateChatById } from '$lib/apis/chats';
@@ -31,6 +32,7 @@
 	export let autoScroll;
 	export let history = {};
 	export let messages = [];
+	export let count = writable(1);
 
 	export let selectedModels;
 
@@ -320,6 +322,7 @@
 									{showPreviousMessage}
 									{showNextMessage}
 									copyToClipboard={copyToClipboardWithToast}
+									count={$count}
 								/>
 							{:else if $mobile || (history.messages[message.parentId]?.models?.length ?? 1) === 1}
 								{#key message.id && history.currentId}
@@ -334,6 +337,7 @@
 										{showNextMessage}
 										{rateMessage}
 										copyToClipboard={copyToClipboardWithToast}
+										count={$count}
 										{continueGeneration}
 										{regenerateResponse}
 										on:action={async (e) => {
