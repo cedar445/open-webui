@@ -270,7 +270,7 @@
         margin: 0 100px; /* 调整左右边距 */
 		gap: 12px;
     }
-	.transition {
+	.transition-suggest {
 		transition: opacity 0.5s ease-in-out; /* 可以调整持续时间和效果 */
 	}
 </style>
@@ -407,15 +407,15 @@
 						
 						{#if messageIdx === messages.length - 1 && message.done}
 							<div class="suggest-container">
-								<div class="flex flex-col flex-1 shrink-0 w-64 justify-between h-18 p-5 px-12 bg-gray-50 hover:bg-gray-100 dark:bg-gray-850 dark:hover:bg-gray-800 rounded-xl transition group"
+								<div class="flex flex-col flex-1 shrink-0 w-64 justify-between h-18 p-5 px-12 bg-gray-50 hover:bg-gray-100 dark:bg-gray-850 dark:hover:bg-gray-800 rounded-xl"
 								>
 								6666666666
 								</div>
-								<div class="flex flex-col flex-1 shrink-0 w-64 justify-between h-18 p-5 px-12 bg-gray-50 hover:bg-gray-100 dark:bg-gray-850 dark:hover:bg-gray-800 rounded-xl transition group"
+								<div class="flex flex-col flex-1 shrink-0 w-64 justify-between h-18 p-5 px-12 bg-gray-50 hover:bg-gray-100 dark:bg-gray-850 dark:hover:bg-gray-800 rounded-xl"
 								>
 								6666666666
 								</div>
-								<div class="flex flex-col flex-1 shrink-0 w-64 justify-between h-18 p-5 px-12 bg-gray-50 hover:bg-gray-100 dark:bg-gray-850 dark:hover:bg-gray-800 rounded-xl transition group"
+								<div class="flex flex-col flex-1 shrink-0 w-64 justify-between h-18 p-5 px-12 bg-gray-50 hover:bg-gray-100 dark:bg-gray-850 dark:hover:bg-gray-800 rounded-xl"
 								>
 								6666666666
 								</div>
