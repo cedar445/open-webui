@@ -171,12 +171,14 @@
 			{:else}
 				<div class="w-full">
 					<div class="flex {$settings?.chatBubble ?? true ? 'justify-end' : ''} mb-2">
-						<!--where to inject round count-->
-						<span
-							class=" self-center justify-end text-black text-xs font-medium uppercase"
-						>
-							#{count}
-						</span>
+						{#if $settings?.chatBubble ?? true}
+							<!--where to inject round count-->
+							<span
+								class=" self-center justify-end text-black text-xs font-medium uppercase"
+							>
+								#{count}
+							</span>
+						{/if}
 
 						<div
 							class="rounded-3xl {$settings?.chatBubble ?? true

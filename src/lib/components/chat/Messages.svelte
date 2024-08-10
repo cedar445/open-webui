@@ -32,7 +32,6 @@
 	export let autoScroll;
 	export let history = {};
 	export let messages = [];
-	export let count = writable(1);
 
 	export let selectedModels;
 
@@ -322,7 +321,7 @@
 									{showPreviousMessage}
 									{showNextMessage}
 									copyToClipboard={copyToClipboardWithToast}
-									count={$count}
+									count={Math.floor(messageIdx / 2) + 1}
 								/>
 							{:else if $mobile || (history.messages[message.parentId]?.models?.length ?? 1) === 1}
 								{#key message.id && history.currentId}
@@ -337,7 +336,7 @@
 										{showNextMessage}
 										{rateMessage}
 										copyToClipboard={copyToClipboardWithToast}
-										count={$count}
+										count={Math.floor(messageIdx / 2) + 1}
 										{continueGeneration}
 										{regenerateResponse}
 										on:action={async (e) => {
