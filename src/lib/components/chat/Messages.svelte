@@ -263,46 +263,16 @@
 	};
 </script>
 <style>
-	.suggest-div {
-		width: 300px;
-		height: 200px;
-		background-color: #4caf50;
-		border-radius: 15px;
-		border: 2px solid #2e7d32;
-		opacity: 0;
-		transition: opacity 2s ease-in-out;
+	.suggest-container {
+        display: flex;
+        justify-content: space-around; /* 让按钮均匀分布 */
+        align-items: center; /* 垂直居中 */
+        margin: 0 100px; /* 调整左右边距 */
+		gap: 12px;
+    }
+	.transition {
+		transition: opacity 0.5s ease-in-out; /* 可以调整持续时间和效果 */
 	}
-	.suggest-div.fade-in {
-		opacity: 1;
-	}
-
-	.suggest-div-1{
-		border: 1px solid #ccc; /* 边框颜色 */
-        border-radius: 10px; /* 圆角半径 */
-        padding: 10px; /* 内边距 */
-		margin-bottom: 10px;
-		margin-right: 100px;
-		margin-left: 100px;
-        transition: background-color 0.3s; /* 鼠标移入时的过渡效果 */
-		opacity: 0;
-		animation: fade-in-up 0.5s forwards; /* 动画效果 */
-		/* 让div在页面加载时渐变出现 */
-	}
-	@keyframes fade-in-up {
-		from {
-			opacity: 0;
-			transform: translateY(20px); /* 向下偏移 */
-		}
-		to {
-			opacity: 1;
-			transform: translateY(0); /* 最终位置 */
-		}
-	}
-	.show {
-		opacity: 1;
-		transform: translateY(0); /* 确保最终位置 */
-	}
-	
 </style>
 <div class="h-full flex">
 	{#if messages.length == 0}
@@ -436,11 +406,21 @@
 						</div>
 						
 						{#if messageIdx === messages.length - 1 && message.done}
-							<div
-								class="suggest-div-1"
-							>
-							6666666666
+							<div class="suggest-container">
+								<div class="flex flex-col flex-1 shrink-0 w-64 justify-between h-18 p-5 px-12 bg-gray-50 hover:bg-gray-100 dark:bg-gray-850 dark:hover:bg-gray-800 rounded-xl transition group"
+								>
+								6666666666
+								</div>
+								<div class="flex flex-col flex-1 shrink-0 w-64 justify-between h-18 p-5 px-12 bg-gray-50 hover:bg-gray-100 dark:bg-gray-850 dark:hover:bg-gray-800 rounded-xl transition group"
+								>
+								6666666666
+								</div>
+								<div class="flex flex-col flex-1 shrink-0 w-64 justify-between h-18 p-5 px-12 bg-gray-50 hover:bg-gray-100 dark:bg-gray-850 dark:hover:bg-gray-800 rounded-xl transition group"
+								>
+								6666666666
+								</div>
 							</div>
+							
 						{/if}
 					</div>
 				{/each}
