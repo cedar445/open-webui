@@ -82,7 +82,7 @@
 
 					<!--where to inject round count if settings.chatBubble is false-->
 					<span
-						class=" self-center text-black text-xs font-medium uppercase"
+						class=" self-center text-black dark:text-white text-xs font-medium uppercase"
 					>
 						#{count}
 					</span>
@@ -174,7 +174,7 @@
 						{#if $settings?.chatBubble ?? true}
 							<!--where to inject round count-->
 							<span
-								class=" self-center justify-end text-black text-xs font-medium uppercase"
+								class=" self-center justify-end text-black dark:text-white text-xs font-medium uppercase"
 							>
 								#{count}
 							</span>

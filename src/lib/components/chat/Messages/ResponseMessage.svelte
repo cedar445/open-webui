@@ -413,7 +413,7 @@
 				<!--where to inject round count-->
 				<!--or before timestamp-->
 				<span
-					class=" self-center text-black text-xs font-medium uppercase"
+					class=" self-center text-black dark:text-white text-xs font-medium uppercase"
 				>
 					#{count}
 				</span>
