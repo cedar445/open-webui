@@ -59,6 +59,8 @@
 	import { ifCliHistory } from './store.js'
 	import { keyContent } from './store.js'
 	import { userId } from './store.js';
+	import { ifCliSuggest } from './store.js';
+	import { resSuggest } from './store.js';
 	//自定义函数
 	function setFalse(){
 		showButton1.set(false);
@@ -190,6 +192,10 @@
 	const userApiUrl = 'http://localhost:8080/api/v1/auths'
 	let jsonData;
 	let userhistory: any[] = [];
+	//suggest响应
+	$: if($ifCliSuggest){
+		submitPrompt($resSuggest)
+	}
 
 	const i18n = getContext('i18n');
 
