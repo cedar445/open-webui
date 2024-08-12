@@ -57,6 +57,8 @@
 	export let regenerateResponse: Function;
 	export let chatActionHandler: Function;
 	export let count;
+	//自定义分数
+	let mark=100;
 
 	let model = null;
 	$: model = $models.find((m) => m.id === message.model);
@@ -1040,6 +1042,11 @@
 															/>
 														</svg>
 													</button>
+												</Tooltip>
+
+												<Tooltip content={$i18n.t('Scores')} placement="bottom">
+													<input class="hover:bg-black/5 dark:hover:bg-white/5 rounded-lg dark:hover:text-white hover:text-black" type="number" bind:value={mark} min="0" max="100" />
+													<input type="range" bind:value={mark} min="0" max="100" />
 												</Tooltip>
 
 												{#each model?.actions ?? [] as action}
