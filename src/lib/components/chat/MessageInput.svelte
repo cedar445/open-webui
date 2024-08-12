@@ -79,7 +79,7 @@
 		}
 		setFalse();
 		ifCliHistory.set(false);
-		console.log("focusout");
+		//console.log("focusout");
 	}
 	function updateHistory(myHistory){
 		setFalse();
@@ -126,7 +126,7 @@
 				console.error('user fetch寄了', error);
 			}
 		);
-		console.log("userid:"+$userId);
+		//console.log("userid:"+$userId);
 	}
 	$: if( $userId == '0' ){
 		getUser();
@@ -985,7 +985,7 @@
 																
 									on:focusout={handleFocusOut}
 									on:focus={()=>{
-										console.log("我focus");
+										//console.log("我focus");
 										regexHistory(prompt);	
 										//console.log("regex:"+$showButton1+$showButton2+$showButton3+$showButton4+$showButton5);															
 									}}

@@ -18,6 +18,7 @@
 	export let updateChatMessages: Function;
 	export let confirmEditResponseMessage: Function;
 	export let rateMessage: Function;
+	export let scoreMessage: Function;
 
 	export let copyToClipboard: Function;
 	export let continueGeneration: Function;
@@ -141,6 +142,7 @@
 							showNextMessage={() => showNextMessage(model)}
 							{readOnly}
 							{rateMessage}
+							{scoreMessage}
 							{copyToClipboard}
 							{continueGeneration}
 							regenerateResponse={async (message) => {

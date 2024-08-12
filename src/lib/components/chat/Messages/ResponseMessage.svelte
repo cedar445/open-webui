@@ -51,6 +51,7 @@
 	export let showPreviousMessage: Function;
 	export let showNextMessage: Function;
 	export let rateMessage: Function;
+	export let scoreMessage: Function;
 
 	export let copyToClipboard: Function;
 	export let continueGeneration: Function;
@@ -1042,12 +1043,7 @@
 															/>
 														</svg>
 													</button>
-												</Tooltip>
-
-												<Tooltip content={$i18n.t('Scores')} placement="bottom">
-													<input class="hover:bg-black/5 dark:hover:bg-white/5 rounded-lg dark:hover:text-white hover:text-black" type="number" bind:value={mark} min="0" max="100" />
-													<input type="range" bind:value={mark} min="0" max="100" />
-												</Tooltip>
+												</Tooltip>												
 
 												{#each model?.actions ?? [] as action}
 													<Tooltip content={action.name} placement="bottom">
@@ -1074,8 +1070,34 @@
 															{/if}
 														</button>
 													</Tooltip>
-												{/each}
+												{/each}											
 											{/if}
+											<Tooltip content={$i18n.t('Scores')} placement="bottom">
+
+												<input class="{isLastMessage
+														? 'visible'
+														: 'invisible group-hover:visible'} hover:bg-black/5 dark:hover:bg-white/5 rounded-lg dark:hover:text-white hover:text-black" 
+														type="number" 
+														value={(message?.annotation?.score ?? 100)} min="0" max="100" 
+														on:load={()=>{
+
+														}}
+														on:change={(e)=>{
+															console.log(parseInt(e.target.value, 10));
+															scoreMessage(message.id, parseInt(e.target.value, 10));
+														}}
+														/>
+												<input class="{isLastMessage
+														? 'visible'
+														: 'invisible group-hover:visible'}" 
+														type="range" 
+														value={(message?.annotation?.score ?? 100)} min="0" max="100" 
+														on:change={(e)=>{
+															console.log(parseInt(e.target.value, 10));
+															scoreMessage(message.id, parseInt(e.target.value, 10));
+														}}
+														/>
+											</Tooltip>
 										{/if}
 									{/if}
 								</div>

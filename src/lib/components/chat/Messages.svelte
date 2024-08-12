@@ -135,9 +135,17 @@
 	const rateMessage = async (messageId, rating) => {
 		history.messages[messageId].annotation = {
 			...history.messages[messageId].annotation,
-			rating: rating
+			rating: rating,
+			//score:0
 		};
+		await updateChatMessages();
+	};
 
+	const scoreMessage = async (messageId, score) => {
+		history.messages[messageId].annotation = {
+			...history.messages[messageId].annotation,
+			score: score
+		};
 		await updateChatMessages();
 	};
 
@@ -377,6 +385,7 @@
 										{showPreviousMessage}
 										{showNextMessage}
 										{rateMessage}
+										{scoreMessage}
 										copyToClipboard={copyToClipboardWithToast}
 										count={Math.floor(messageIdx / 2) + 1}
 										{continueGeneration}
@@ -408,6 +417,7 @@
 										{updateChatMessages}
 										{confirmEditResponseMessage}
 										{rateMessage}
+										{scoreMessage}
 										copyToClipboard={copyToClipboardWithToast}
 										{continueGeneration}
 										{regenerateResponse}
