@@ -15,6 +15,7 @@
 	import DocumentDuplicate from '$lib/components/icons/DocumentDuplicate.svelte';
 	import Bookmark from '$lib/components/icons/Bookmark.svelte';
 	import BookmarkSlash from '$lib/components/icons/BookmarkSlash.svelte';
+	import Finished from '$lib/components/icons/Finished.svelte';
 	import { addTagById, deleteTagById, getTagsById } from '$lib/apis/chats';
 
 	const i18n = getContext('i18n');
@@ -30,12 +31,23 @@
 
 	let show = false;
 	let pinned = false;
+	let finished = false;
 
 	const pinHandler = async () => {
 		if (pinned) {
 			await deleteTagById(localStorage.token, chatId, 'pinned');
 		} else {
 			await addTagById(localStorage.token, chatId, 'pinned');
+		}
+		dispatch('change');
+	};
+
+	// TODO: Implement finishHandler
+	const finishHandler = async () => {
+		if (finished) {
+			// await deleteTagById(localStorage.token, chatId, 'finished');
+		} else {
+			// await addTagById(localStorage.token, chatId, 'finished');
 		}
 		dispatch('change');
 	};
@@ -106,6 +118,24 @@
 			>
 				<DocumentDuplicate strokeWidth="2" />
 				<div class="flex items-center">{$i18n.t('Clone')}</div>
+			</DropdownMenu.Item>
+
+			<!--where to inject finish button-->
+			<DropdownMenu.Item
+				class="flex gap-2 items-center px-3 py-2 text-sm  font-medium cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 rounded-md"
+				on:click={() => {
+					finishHandler();
+				}}
+			>
+				{#if finished}
+					<Finished strokeWidth="2" />
+					<!--TODO: add translation-->
+					<div class="flex items-center">{$i18n.t('Unpin')}</div>
+				{:else}
+					<!--TODO: add icon-->
+					<Bookmark strokeWidth="2" />
+					<div class="flex items-center">{$i18n.t('Pin')}</div>
+				{/if}
 			</DropdownMenu.Item>
 
 			<DropdownMenu.Item

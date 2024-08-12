@@ -116,6 +116,9 @@
 		>
 			<div class=" flex self-center flex-1 w-full">
 				<div class=" text-left self-center overflow-hidden w-full h-[20px]">
+
+					<!--where to inject session done icon-->
+					
 					{chat.title}
 				</div>
 			</div>
