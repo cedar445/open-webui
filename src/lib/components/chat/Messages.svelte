@@ -34,7 +34,7 @@
 
 	export let selectedModels;
 	//自定义变量
-	let ifShowSuggest=false;
+	import { ifShowSuggest } from './store';
 	import { ifCliSuggest } from './store';
 	import { resSuggest } from './store';
 	import { suggest1 } from './store';
@@ -440,35 +440,36 @@
 								{/key}
 							{/if}
 						</div>
-						
-						{#if messageIdx === messages.length - 1 && message.done}
-							<div class="suggest-container">
-								<button class="flex flex-col flex-1 shrink-0 w-64 justify-between h-18 p-5 px-12 bg-gray-50 hover:bg-gray-100 dark:bg-gray-850 dark:hover:bg-gray-800 rounded-xl"
-								on:click={()=>{
-									ifCliSuggest.set(true)
-									resSuggest.set($suggest1)
-								}}
-								>
-								{$suggest1}
-								</button>
-								<button class="flex flex-col flex-1 shrink-0 w-64 justify-between h-18 p-5 px-12 bg-gray-50 hover:bg-gray-100 dark:bg-gray-850 dark:hover:bg-gray-800 rounded-xl"
-								on:click={()=>{
-									ifCliSuggest.set(true)
-									resSuggest.set($suggest2)
-								}}
-								>
-								{$suggest2}
-								</button>
-								<button class="flex flex-col flex-1 shrink-0 w-64 justify-between h-18 p-5 px-12 bg-gray-50 hover:bg-gray-100 dark:bg-gray-850 dark:hover:bg-gray-800 rounded-xl"
-								on:click={()=>{
-									ifCliSuggest.set(true)
-									resSuggest.set($suggest3)
-								}}
-								>
-								{$suggest3}
-								</button>
-							</div>
-							
+						{#if $ifShowSuggest}
+							{#if messageIdx === messages.length - 1 && message.done}
+								<div class="suggest-container">
+									<button class="flex flex-col flex-1 shrink-0 w-64 justify-between h-18 p-5 px-12 bg-gray-50 hover:bg-gray-100 dark:bg-gray-850 dark:hover:bg-gray-800 rounded-xl"
+									on:click={()=>{
+										ifCliSuggest.set(true)
+										resSuggest.set($suggest1)
+									}}
+									>
+									{$suggest1}
+									</button>
+									<button class="flex flex-col flex-1 shrink-0 w-64 justify-between h-18 p-5 px-12 bg-gray-50 hover:bg-gray-100 dark:bg-gray-850 dark:hover:bg-gray-800 rounded-xl"
+									on:click={()=>{
+										ifCliSuggest.set(true)
+										resSuggest.set($suggest2)
+									}}
+									>
+									{$suggest2}
+									</button>
+									<button class="flex flex-col flex-1 shrink-0 w-64 justify-between h-18 p-5 px-12 bg-gray-50 hover:bg-gray-100 dark:bg-gray-850 dark:hover:bg-gray-800 rounded-xl"
+									on:click={()=>{
+										ifCliSuggest.set(true)
+										resSuggest.set($suggest3)
+									}}
+									>
+									{$suggest3}
+									</button>
+								</div>
+								
+							{/if}
 						{/if}
 					</div>
 				{/each}
