@@ -711,5 +711,7 @@
 	"Your account status is currently pending activation.": "El estado de su cuenta actualmente se encuentra pendiente de activación.",
 	"Your entire contribution will go directly to the plugin developer; Open WebUI does not take any percentage. However, the chosen funding platform might have its own fees.": "",
 	"Youtube": "Youtube",
-	"Youtube Loader Settings": "Configuración del cargador de Youtube"
+	"Youtube Loader Settings": "Configuración del cargador de Youtube",
+	"Finish": "",
+	"Unfinish": ""
 }

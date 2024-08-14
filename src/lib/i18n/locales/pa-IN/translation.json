@@ -710,5 +710,7 @@
 	"Your account status is currently pending activation.": "",
 	"Your entire contribution will go directly to the plugin developer; Open WebUI does not take any percentage. However, the chosen funding platform might have its own fees.": "",
 	"Youtube": "ਯੂਟਿਊਬ",
-	"Youtube Loader Settings": "ਯੂਟਿਊਬ ਲੋਡਰ ਸੈਟਿੰਗਾਂ"
+	"Youtube Loader Settings": "ਯੂਟਿਊਬ ਲੋਡਰ ਸੈਟਿੰਗਾਂ",
+	"Finish": "",
+	"Unfinish": ""
 }

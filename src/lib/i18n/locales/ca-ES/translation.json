@@ -711,5 +711,7 @@
 	"Your account status is currently pending activation.": "El compte està actualment pendent d'activació",
 	"Your entire contribution will go directly to the plugin developer; Open WebUI does not take any percentage. However, the chosen funding platform might have its own fees.": "Tota la teva contribució anirà directament al desenvolupador del complement; Open WebUI no se'n queda cap percentatge. Tanmateix, la plataforma de finançament escollida pot tenir les seves pròpies comissions.",
 	"Youtube": "Youtube",
-	"Youtube Loader Settings": "Preferències del carregador de Youtube"
+	"Youtube Loader Settings": "Preferències del carregador de Youtube",
+	"Finish": "",
+	"Unfinish": ""
 }

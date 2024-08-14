@@ -43,6 +43,7 @@
 	};
 
 	// TODO: Implement finishHandler
+	//! bug: failed to build if uncommented
 	const finishHandler = async () => {
 		if (finished) {
 			// await deleteTagById(localStorage.token, chatId, 'finished');
@@ -129,12 +130,11 @@
 			>
 				{#if finished}
 					<Finished strokeWidth="2" />
-					<!--TODO: add translation-->
-					<div class="flex items-center">{$i18n.t('Unpin')}</div>
+					<div class="flex items-center">{$i18n.t('Unfinish')}</div>
 				{:else}
 					<!--TODO: add icon-->
-					<Bookmark strokeWidth="2" />
-					<div class="flex items-center">{$i18n.t('Pin')}</div>
+					<Finished strokeWidth="2" />
+					<div class="flex items-center">{$i18n.t('Finish')}</div>
 				{/if}
 			</DropdownMenu.Item>
 

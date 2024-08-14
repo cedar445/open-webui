@@ -711,5 +711,7 @@
 	"Your account status is currently pending activation.": "Statusul contului dvs. este în așteptare pentru activare.",
 	"Your entire contribution will go directly to the plugin developer; Open WebUI does not take any percentage. However, the chosen funding platform might have its own fees.": "Întreaga dvs. contribuție va merge direct la dezvoltatorul plugin-ului; Open WebUI nu ia niciun procent. Cu toate acestea, platforma de finanțare aleasă ar putea avea propriile taxe.",
 	"Youtube": "Youtube",
-	"Youtube Loader Settings": "Setări Încărcător Youtube"
+	"Youtube Loader Settings": "Setări Încărcător Youtube",
+	"Finish": "",
+	"Unfinish": ""
 }

@@ -710,5 +710,7 @@
 	"Your account status is currently pending activation.": "สถานะบัญชีของคุณกำลังรอการเปิดใช้งาน",
 	"Your entire contribution will go directly to the plugin developer; Open WebUI does not take any percentage. However, the chosen funding platform might have its own fees.": "การสนับสนุนทั้งหมดของคุณจะไปยังนักพัฒนาปลั๊กอินโดยตรง; Open WebUI ไม่รับส่วนแบ่งใด ๆ อย่างไรก็ตาม แพลตฟอร์มการระดมทุนที่เลือกอาจมีค่าธรรมเนียมของตัวเอง",
 	"Youtube": "Youtube",
-	"Youtube Loader Settings": "การตั้งค่าโหลดเดอร์ Youtube"
+	"Youtube Loader Settings": "การตั้งค่าโหลดเดอร์ Youtube",
+	"Finish": "",
+	"Unfinish": ""
 }
