@@ -44,6 +44,15 @@
 			await pinnedChats.set(await getChatListByTagName(localStorage.token, 'pinned'));
 		}
 	};
+	//自定义更改完成
+	const updateChatIfComplete = async (id, _ifComplete) => {
+		await updateChatById(localStorage.token, id, {
+			ifComplete: _ifComplete
+		});
+		await chats.set(await getChatList(localStorage.token));
+		await pinnedChats.set(await getChatListByTagName(localStorage.token, 'pinned'));
+		console.log("测试ifComplete");
+	};
 
 	const cloneChatHandler = async (id) => {
 		const res = await cloneChatById(localStorage.token, id).catch((error) => {
@@ -115,9 +124,17 @@
 			draggable="false"
 		>
 			<div class=" flex self-center flex-1 w-full">
-				<div class=" text-left self-center overflow-hidden w-full h-[20px]">
+				<div class=" text-left self-center overflow-hidden w-[80%] h-[20px]">
 					{chat.title}
 				</div>
+				<button class=" text-left self-center overflow-hidden w-[20%] h-[20px]"
+				on:click={()=>{				
+					updateChatIfComplete(chat.id,"666");					
+					console.log(chat.ifComplete);
+				}}
+				>
+				6
+				</button>
 			</div>
 		</a>
 	{/if}
@@ -213,7 +230,7 @@
 					</button>
 				</Tooltip>
 			</div>
-		{:else}
+		{:else}		
 			<div class="flex self-center space-x-1 z-10">
 				<ChatMenu
 					chatId={chat.id}
