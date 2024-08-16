@@ -135,7 +135,7 @@
 				on:click={()=>{				
 					updateChatIfComplete(chat.id,"666");
 					console.log(chat);
-					console.log(chat.ifComplete);
+					console.log(chat.chat.ifComplete);
 				}}
 				>
 				6
