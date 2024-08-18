@@ -352,6 +352,8 @@
 			const chatContent = chat.chat;
 
 			if (chatContent) {
+				console.log($chats);
+				console.log(chat);
 				console.log(chatContent);
 
 				selectedModels =

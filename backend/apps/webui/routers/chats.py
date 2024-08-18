@@ -45,7 +45,30 @@ router = APIRouter()
 async def get_session_user_chat_list(
     user=Depends(get_verified_user), skip: int = 0, limit: int = 50
 ):
+    # chats = Chats.get_chat_list_by_user_id(id, user.id)
+    # resp = []
+
+    # if chats:
+    #     for chat in chats:
+    #         resp.append(ChatResponse(**{**chat.model_dump(), "chat": json.loads(chat.chat)}))
+    # else:
+    #     raise HTTPException(
+    #         status_code=status.HTTP_401_UNAUTHORIZED, detail=ERROR_MESSAGES.NOT_FOUND
+    #     )
     return Chats.get_chat_title_id_list_by_user_id(user.id, skip=skip, limit=limit)
+
+############################
+# GetChatListDetail
+############################
+
+@router.get("/detail", response_model=List[ChatResponse])
+async def get_session_user_chat_list_detail(
+    user=Depends(get_verified_user), skip: int = 0, limit: int = 50
+):
+    return [
+        ChatResponse(**{**chat.model_dump(), "chat": json.loads(chat.chat)})
+        for chat in Chats.get_chat_list_by_user_id(user.id, skip=skip, limit=limit)
+    ]
 
 
 ############################
