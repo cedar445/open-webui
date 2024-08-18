@@ -13,6 +13,7 @@
 		getChatList,
 		getChatById,
 		getChatListByTagName,
+		getChatListDetail,
 		updateChatById
 	} from '$lib/apis/chats';
 	import { chatId, chats, mobile, pinnedChats, showSidebar } from '$lib/stores';
@@ -62,9 +63,12 @@
 		await updateChatById(localStorage.token, id, {
 			ifComplete: _ifComplete
 		});
-		await chats.set(await getChatList(localStorage.token));
+		console.log(await getChatListDetail(localStorage.token));
+		//! get wrong data
+		await chats.set(await getChatListDetail(localStorage.token));
 		await pinnedChats.set(await getChatListByTagName(localStorage.token, 'pinned'));
 		console.log("测试ifComplete");
+		console.log($chats);
 	};
 
 	const cloneChatHandler = async (id) => {
@@ -140,16 +144,12 @@
 				<div class=" text-left self-center overflow-hidden w-[70%] h-[20px]">
 					{chat.title}
 				</div>
-				<button class=" text-left self-center overflow-hidden w-[15%] h-[20px]"
-					on:click={()=>{	
-						console.log(chat);
-						if(true){
-							updateChatIfComplete(chat.id,true);
-						}
-						else{
-							updateChatIfComplete(chat.id,false);
-						}
-					}}
+				<button class=" text-left self-center overflow-hidden w-[20%] h-[20px]"
+				on:click={()=>{				
+					updateChatIfComplete(chat.id,"666");
+					console.log(chat);
+					console.log(chat.chat.ifComplete);
+				}}
 				>
 				{#if true}
 				✔
