@@ -11,6 +11,7 @@
 		cloneChatById,
 		deleteChatById,
 		getChatList,
+		getChatById,
 		getChatListByTagName,
 		updateChatById
 	} from '$lib/apis/chats';
@@ -44,6 +45,18 @@
 			await pinnedChats.set(await getChatListByTagName(localStorage.token, 'pinned'));
 		}
 	};
+	//自定义变量
+	/*
+	let mychat;
+	$: getChatById(localStorage.token, chat.id).then(result=>{
+		mychat=result.chat;
+	})
+	const getMyChat = async() => {
+		getChatById(localStorage.token, chat.id).then(result=>{
+			mychat=result.chat;
+		})
+	}
+	*/
 	//自定义更改完成
 	const updateChatIfComplete = async (id, _ifComplete) => {
 		await updateChatById(localStorage.token, id, {
@@ -124,16 +137,25 @@
 			draggable="false"
 		>
 			<div class=" flex self-center flex-1 w-full">
-				<div class=" text-left self-center overflow-hidden w-[80%] h-[20px]">
+				<div class=" text-left self-center overflow-hidden w-[70%] h-[20px]">
 					{chat.title}
 				</div>
-				<button class=" text-left self-center overflow-hidden w-[20%] h-[20px]"
-				on:click={()=>{				
-					updateChatIfComplete(chat.id,"666");					
-					console.log(chat.ifComplete);
-				}}
+				<button class=" text-left self-center overflow-hidden w-[15%] h-[20px]"
+					on:click={()=>{	
+						console.log(chat);
+						if(true){
+							updateChatIfComplete(chat.id,true);
+						}
+						else{
+							updateChatIfComplete(chat.id,false);
+						}
+					}}
 				>
-				6
+				{#if true}
+				✔
+				{:else}
+				?
+				{/if}
 				</button>
 			</div>
 		</a>
