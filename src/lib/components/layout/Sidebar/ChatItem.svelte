@@ -47,8 +47,20 @@
 		}
 	};
 	//自定义变量
-	/*
 	let mychat;
+	let mychats;
+	$: {
+		//await chats.set(await getChatListDetail(localStorage.token));
+		mychats = $chats;  // 解包 store 的值
+		mychat = mychats.find(element => element.id === chat.id).chat;		
+	}
+	/*
+	$: $chat.array.forEach(element => {
+		if(element.id=chat.id){
+			mychat=element;
+		}
+	});
+	
 	$: getChatById(localStorage.token, chat.id).then(result=>{
 		mychat=result.chat;
 	})
@@ -63,7 +75,7 @@
 		await updateChatById(localStorage.token, id, {
 			ifComplete: _ifComplete
 		});
-		console.log(await getChatListDetail(localStorage.token));
+		//console.log(await getChatListDetail(localStorage.token));
 		//! get wrong data
 		await chats.set(await getChatListDetail(localStorage.token));
 		await pinnedChats.set(await getChatListByTagName(localStorage.token, 'pinned'));
@@ -93,6 +105,10 @@
 	const focusEdit = async (node: HTMLInputElement) => {
 		node.focus();
 	};
+	//开始时执行
+	onMount(async()=>{
+		await chats.set(await getChatListDetail(localStorage.token));
+	})
 </script>
 
 <ShareChatModal bind:show={showShareChatModal} chatId={chat.id} />
@@ -141,17 +157,29 @@
 			draggable="false"
 		>
 			<div class=" flex self-center flex-1 w-full">
-				<div class=" text-left self-center overflow-hidden w-[70%] h-[20px]">
+				<div class=" text-left self-center overflow-hidden w-[75%] h-[20px]">
 					{chat.title}
 				</div>
 				<button class=" text-left self-center overflow-hidden w-[20%] h-[20px]"
-				on:click={()=>{				
-					updateChatIfComplete(chat.id,"666");
-					console.log(chat);
-					console.log(chat.chat.ifComplete);
+				on:click={()=>{
+					if(mychat && mychat.ifComplete!==undefined){
+						if(mychat.ifComplete === true){
+							updateChatIfComplete(chat.id,false);
+						}
+						else{
+							updateChatIfComplete(chat.id,true);
+						}
+					}
+					else{
+						updateChatIfComplete(chat.id,true);
+					}
+					//console.log($chats);
+					//console.log(mychats);
+					console.log(chat.id);
+					console.log(mychat.ifComplete);
 				}}
 				>
-				{#if true}
+				{#if mychat && mychat.ifComplete !== undefined && mychat.ifComplete === true}
 				✔
 				{:else}
 				?
