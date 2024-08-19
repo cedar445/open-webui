@@ -182,7 +182,7 @@
 				{#if mychat && mychat.ifComplete !== undefined && mychat.ifComplete === true}
 				✔
 				{:else}
-				?
+				⭕
 				{/if}
 				</button>
 			</div>
