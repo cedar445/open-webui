@@ -71,7 +71,7 @@
 	}
 	*/
 	//自定义更改完成
-	const updateChatIfComplete = async (id, _ifComplete) => {
+	export const updateChatIfComplete = async (id, _ifComplete) => {
 		await updateChatById(localStorage.token, id, {
 			ifComplete: _ifComplete
 		});
@@ -82,7 +82,7 @@
 		console.log("测试ifComplete");
 		console.log($chats);
 	};
-
+	
 	const cloneChatHandler = async (id) => {
 		const res = await cloneChatById(localStorage.token, id).catch((error) => {
 			toast.error(error);

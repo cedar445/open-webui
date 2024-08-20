@@ -40,10 +40,12 @@
 	import { suggest1 } from './store';
 	import { suggest2 } from './store';
 	import { suggest3 } from './store';
+	import { ifShowComplete } from './store';
+	//import { updateChatIfComplete } from '../layout/Sidebar/ChatItem.svelte';
 	//自定义函数
 	function showSuggest(){
 		setTimeout(()=>{
-			ifShowSuggest=true;
+			ifShowSuggest.set(true);
 		},1000)
 	}
 	$: {
@@ -62,6 +64,7 @@
 				suggest1.set('a');
 				suggest2.set('a');
 				suggest3.set('a');
+				ifShowComplete.set(true);
 			}
 		}
 	}
@@ -469,6 +472,26 @@
 									</button>
 								</div>
 								
+							{/if}
+						{/if}
+						{#if $ifShowComplete}
+							{#if messageIdx === messages.length - 1 && message.done}
+								<div class="suggest-container">
+									<button class="flex flex-col flex-1 shrink-0 w-64 justify-between h-18 p-5 px-12 bg-gray-50 hover:bg-gray-100 dark:bg-gray-850 dark:hover:bg-gray-800 rounded-xl"
+									on:click={()=>{
+										//updateChatIfComplete(chatId,true);
+									}}
+									>
+									完成
+									</button>
+									<button class="flex flex-col flex-1 shrink-0 w-64 justify-between h-18 p-5 px-12 bg-gray-50 hover:bg-gray-100 dark:bg-gray-850 dark:hover:bg-gray-800 rounded-xl"
+									on:click={()=>{
+										//updateChatIfComplete(chatId,false);
+									}}
+									>
+									未完成
+									</button>
+								</div>
 							{/if}
 						{/if}
 					</div>
